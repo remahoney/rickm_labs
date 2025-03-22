@@ -17,7 +17,7 @@ pipeline {
   stages {
     stage('Checkout code and prepare environment') {
       steps {
-        git clone 'https://github.com/remahoney/Continuous-Delivery-with-Docker-and-Jenkins-Second-Edition.git', branch: 'master'
+        git clone 'https://github.com/remahoney/Continuous-Delivery-with-Docker-and-Jenkins-Second-Edition.git' branch: 'master'
         sh """
           set -e
           cd ${PROJECT_DIR}
