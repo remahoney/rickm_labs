@@ -20,7 +20,7 @@ pipeline {
         git branch: 'master', url: 'https://github.com/remahoney/Continuous-Delivery-with-Docker-and-Jenkins-Second-Edition.git'
         sh """
           set -e
-          cd ${PROJECT_DIR}
+          cd $PROJECT_DIR
           chmod +x gradlew
         """
       }
@@ -29,7 +29,7 @@ pipeline {
       steps {
         sh """
           set -e
-          cd ${PROJECT_DIR}
+          cd $PROJECT_DIR
           ./gradlew build
         """
       }
@@ -40,7 +40,7 @@ pipeline {
           withCredentials([usernamePassword(credentialsId: 'docker-registry', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
         sh """
           set -e
-          cd ${PROJECT_DIR}
+          cd $PROJECT_DIR
           echo "\$DOCKER_PASS" | docker login \$REGISTRY -u \$DOCKER_USER --password-stdin
           docker build -t ${IMAGE_NAME} .
           docker tag ${IMAGE_NAME} ${REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_TAG}
